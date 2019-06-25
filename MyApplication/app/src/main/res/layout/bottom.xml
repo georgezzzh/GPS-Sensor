@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+<LinearLayout
+    android:id="@+id/main_bottom_bar"
+    android:background="#FFFFFF"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50dp">
+
+    <RelativeLayout
+        android:id="@+id/home"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/home_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/title_home"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/home_image"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_above="@+id/home_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_home_black_24dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/pie"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/pie_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/title_pie"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/pie_image"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_above="@+id/pie_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_dashboard_black_24dp" />
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/set"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/set_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="3dp"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/title_set"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/set_image"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_above="@+id/set_text"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="3dp"
+            android:src="@drawable/ic_notifications_black_24dp" />
+    </RelativeLayout>
+</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
