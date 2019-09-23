@@ -14,7 +14,7 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pc"
             android:layout_width="match_parent"
-            android:layout_height="300dp"/>
+            android:layout_height="250dp"/>
     </LinearLayout>
 
 </LinearLayout>

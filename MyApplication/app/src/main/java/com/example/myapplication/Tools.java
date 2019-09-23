@@ -7,16 +7,25 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import java.util.ArrayList;
+import org.joda.time.DateTime;
+
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public class Tools {
     private static final String thisPackageName="com.example.myapplication";
+    //保存的数据集合
+    private static List<AppUsage> dataSet=new LinkedList<>();
+
+    public static List<AppUsage> getDataSet() {
+        return dataSet;
+    }
     public static String sec2hourWithMin(int second){
         if(second<60) return second+" s";
         else if(second>60 && second<60*60) return second/60+" m "+second%60+" s";
@@ -27,23 +36,34 @@ public class Tools {
             return h+" h "+min+" m "+second%60+" s";
         }
     }
+    public void getTimePerHour()
+    {
+        //划分为24个区间，一个小时一个区间
+        long[] time=new long[24];
+        DateTime start=new DateTime();
+
+    }
+    //return instance of AppUsage,which include AppName,package name, during time
     public static List<AppUsage> getAllAppUsage(Context context){
+        //已经统计过了，重新统计
+        if(dataSet.size()!=0)
+            dataSet.clear();
+        long statisticStart=System.currentTimeMillis();
         UsageStatsManager usm=(UsageStatsManager) context.getSystemService(Context.USAGE_STATS_SERVICE);
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
+        calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         long start =calendar.getTime().getTime();
         long end=System.currentTimeMillis();
         if(usm==null){
-            Log.i("demoFatal","usm is null");
+            Log.e("fatal","usm(UsageStatsManger) is null");
             return null;
         }
         UsageEvents usageEvents = usm.queryEvents(start, end);
         Map<String,Integer> allApp=getAllAppUseTime(usageEvents);
         PackageManager pm = context.getPackageManager();
-        List<AppUsage> dataSet=new ArrayList<>();
         for(Map.Entry entry:allApp.entrySet()){
             int time=(Integer) entry.getValue()/(1000);
             String packageName=entry.getKey().toString();
@@ -51,7 +71,6 @@ public class Tools {
             try {
                 ApplicationInfo appInfo = pm.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
                 appRealName=pm.getApplicationLabel(appInfo).toString();
-
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -59,9 +78,17 @@ public class Tools {
             dataSet.add(temp);
         }
         Collections.sort(dataSet);
+        long statisticEnd=System.currentTimeMillis();
+        Log.i("demo","统计时长的耗时:"+(statisticEnd-statisticStart)+"ms");
+        //打印一下应用信息
+        for(AppUsage tmp:dataSet)
+            Log.i("appTime",tmp.toString());
+        //设置AppUsage中的dataSet，后续做饼图时会用到
+        //AppUsage.setDataSet(dataSet);
         return dataSet;
     }
-     private static Map<String,Integer> getAllAppUseTime(UsageEvents usageEvents){
+    //返回 {"AppName":AppTime}
+    private static Map<String,Integer> getAllAppUseTime(UsageEvents usageEvents){
         Map<String,Long> openTime=new HashMap<>();
         Map<String,Integer> allApp=new HashMap<>();
         while (usageEvents.hasNextEvent()){
@@ -94,8 +121,6 @@ public class Tools {
              Log.i("demoFatal","This packageName has error");
              return allApp;
          }
-         int diff=(int)(System.currentTimeMillis()-openTime.get(thisPackageName));
-         allApp.put(thisPackageName, allApp.get(thisPackageName)+diff);
          return allApp;
     }
 }

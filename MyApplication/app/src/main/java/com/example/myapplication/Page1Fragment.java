@@ -3,21 +3,18 @@ package com.example.myapplication;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.annotation.NonNull;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import androidx.fragment.app.Fragment;
-
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Page1Fragment extends Fragment {
     private View view;
@@ -31,53 +28,62 @@ public class Page1Fragment extends Fragment {
     @Override
     public void onStart() {
         refreshPage();
-        Log.i("demo","第一个view");
+        Log.d("homePage","第一个view");
         super.onStart();
     }
     Page1Fragment(Context context){
         this.context=context;
     }
-    private Context getApplicationContext(){
-        return this.context;
-    }
     private  void refreshPage(){
-
-        Context applicationContext = getApplicationContext();
-        List<AppUsage> dataSet =Tools.getAllAppUsage(applicationContext);
-        AppUsage.setDataSet(dataSet);
-        LinearLayout mainLinerLayout=getView().findViewById(R.id.main_body);
-        mainLinerLayout.removeAllViews();
+        ArrayList<HashMap<String, Object>> dataSet= new ArrayList<>();
+        int defaultIcon=R.drawable.android;
+        Context context = getContext();
         int totalTimeUsage=0;
-        PackageManager pm = getApplicationContext().getPackageManager();
-        for (AppUsage appUsage:dataSet){
+        PackageManager pm = context.getPackageManager();
+        for (AppUsage appUsage:Tools.getAllAppUsage(context)){
+
+            HashMap<String,Object>pairs=new HashMap<>();
             if(appUsage.getFrontTime()==0) continue;
             totalTimeUsage+=appUsage.getFrontTime();
-            TextView textView=new TextView(getApplicationContext());
-            textView.setText(appUsage.getRealName()+"\t"+Tools.sec2hourWithMin(appUsage.getFrontTime()));
-            ApplicationInfo appInfo = null;
-            Drawable icon=null;
-            try {
-                appInfo = pm.getApplicationInfo(appUsage.getPackageName(), PackageManager.GET_META_DATA);
-                icon = appInfo.loadIcon(pm);
-                if(icon==null)
-                    Log.i("demoFatal","app ICON is null");
-            } catch (PackageManager.NameNotFoundException e) {
-                e.printStackTrace();
+            if(appUsage.getRealName()!=null && !appUsage.getRealName().equals("")){
+                pairs.put("title",appUsage.getRealName());
+                pairs.put("spanTime",Tools.sec2hourWithMin(appUsage.getFrontTime()));
+                try {
+                    ApplicationInfo appInfo = pm.getApplicationInfo(appUsage.getPackageName(), PackageManager.GET_META_DATA);
+                    Drawable drawable = appInfo.loadIcon(pm);
+                    pairs.put("picture",drawable);
+                }catch(PackageManager.NameNotFoundException e){
+                    e.printStackTrace();
+                }
             }
-            if(icon!=null)
-                icon.setBounds(0,0,120,120);
-            textView.setCompoundDrawables(icon,null,null,null);
-            textView.setHeight(140);
-            textView.setGravity(Gravity.CENTER_VERTICAL);
-            textView.setTextColor(Color.BLACK);
-            textView.setCompoundDrawablePadding(100);
-            mainLinerLayout.addView(textView);
+            else{
+                pairs.put("title", "已卸载的应用");
+                pairs.put("spanTime",Tools.sec2hourWithMin(appUsage.getFrontTime()));
+                //默认已经卸载过的icon
+                pairs.put("picture",defaultIcon);
+            }
+            Log.d("homePage",pairs.toString());
+            dataSet.add(pairs);
         }
-
-        TextView view1=new TextView(applicationContext);
-        view1.setText("总使用时间为:"+Tools.sec2hourWithMin(totalTimeUsage));
-        view1.setTextColor(Color.BLACK);
-        view1.setHeight(150);
-        mainLinerLayout.addView(view1,0);
+        HashMap<String,Object>pairs=new HashMap<>();
+        pairs.put("title","Screen");
+        pairs.put("picture",R.drawable.screen);
+        pairs.put("spanTime",Tools.sec2hourWithMin(totalTimeUsage));
+        dataSet.add(0,pairs);
+        SimpleAdapter simpleAdapter = new SimpleAdapter(getContext(), dataSet, R.layout.photo_item, new String[]{"picture", "title","spanTime"}, new int[]{R.id.image, R.id.title, R.id.timeSpan});
+        simpleAdapter.setViewBinder(new SimpleAdapter.ViewBinder() {
+            @Override
+            public boolean setViewValue(View view, Object data, String s) {
+                if (view instanceof ImageView && data instanceof Drawable) {
+                    ImageView iv = (ImageView) view;
+                    iv.setImageDrawable((Drawable) data);
+                    return true;
+                } else
+                    return false;
+            }
+        });
+        ListView listView=getView().findViewById(R.id.list_view);
+        listView.setAdapter(simpleAdapter);;
+        //super.onStart();
     }
 }
