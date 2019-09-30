@@ -68,7 +68,7 @@ public class Page2Fragment extends Fragment {
             xValues.add(appUsage.getRealName());
             String color=color4app.get(appUsage.getPackageName());
             if(color==null||color.equals(""))
-               colors.add(Color.parseColor(colorsRepo[i%colorsRepo.length]));
+                colors.add(Color.parseColor(colorsRepo[i%colorsRepo.length]));
             else
                 colors.add(Color.parseColor(color));
         }

@@ -7,9 +7,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import org.joda.time.DateTime;
-
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -17,6 +14,8 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+//import org.joda.time.DateTime;
 
 public class Tools {
     private static final String thisPackageName="com.example.myapplication";
@@ -36,12 +35,20 @@ public class Tools {
             return h+" h "+min+" m "+second%60+" s";
         }
     }
-    public void getTimePerHour()
+    public static void getTimePerHour()
     {
         //划分为24个区间，一个小时一个区间
-        long[] time=new long[24];
-        DateTime start=new DateTime();
-
+        /*
+        DateTime[] array=new DateTime[24];
+        DateTime aux=new DateTime();
+        for(int i=0;i<24;i++){
+            array[i] = new DateTime(aux.getYear(),aux.getMonthOfYear(),aux.getDayOfMonth(),i,0,0);
+        }
+        for(DateTime tmp:array){
+            Log.i("demo",tmp.getMillis()+"");
+            Log.i("demo",new Date(tmp.getMillis()).toString());
+        }
+        */
     }
     //return instance of AppUsage,which include AppName,package name, during time
     public static List<AppUsage> getAllAppUsage(Context context){

@@ -38,7 +38,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_home_black_24dp" />
+            app:srcCompat="@drawable/ic_home_black_24dp" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/pie"
@@ -66,7 +66,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_dashboard_black_24dp" />
+            app:srcCompat="@drawable/ic_dashboard_black_24dp" />
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/set"
@@ -94,7 +94,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="3dp"
-            android:src="@drawable/ic_notifications_black_24dp" />
+            app:srcCompat="@drawable/ic_notifications_black_24dp" />
     </RelativeLayout>
 </LinearLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
