@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.sonydafa.phoneUsage;
 
 import java.util.List;
 

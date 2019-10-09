@@ -1,20 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include
         layout="@layout/head"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"/>
-    <TextView
+    <LinearLayout
+        android:paddingTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="第三page"
-        />
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <TextView
+            android:gravity="center"
+            android:text="@string/sensor_light"
+            android:paddingBottom="20dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/circularProgressBar"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            app:cpb_background_progressbar_color="#b6bbd8"
+            app:cpb_background_progressbar_width="5dp"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="#3f51b5"
+            app:cpb_progressbar_width="10dp"
+            app:cpb_round_border="false" />
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/lightDegree"
+            />
+    </LinearLayout>
 
-    <ListView
-        android:id="@+id/list_view"
+    <Button
+        android:background="@drawable/button_shape"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:text="@string/button_compass"
+        android:textColor="#ffffff"
+        android:id="@+id/compass" />
 </LinearLayout>

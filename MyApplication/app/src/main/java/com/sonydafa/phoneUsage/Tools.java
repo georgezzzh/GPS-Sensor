@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.sonydafa.phoneUsage;
 
 import android.app.usage.UsageEvents;
 import android.app.usage.UsageStatsManager;
@@ -18,7 +18,7 @@ import java.util.Map;
 //import org.joda.time.DateTime;
 
 public class Tools {
-    private static final String thisPackageName="com.example.myapplication";
+    private static final String thisPackageName="com.sonydafa.myapplication";
     //保存的数据集合
     private static List<AppUsage> dataSet=new LinkedList<>();
 

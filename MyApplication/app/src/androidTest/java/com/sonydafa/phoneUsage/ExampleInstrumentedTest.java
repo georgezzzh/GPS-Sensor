@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.sonydafa.phoneUsage;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.myapplication", appContext.getPackageName());
+        assertEquals("com.sonydafa.myapplication", appContext.getPackageName());
     }
 }

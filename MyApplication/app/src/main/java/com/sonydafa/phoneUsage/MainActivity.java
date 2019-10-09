@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.sonydafa.phoneUsage;
 
 import android.app.AppOpsManager;
 import android.content.Context;
@@ -15,6 +15,8 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.sonydafa.phoneUsage.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
@@ -98,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 }

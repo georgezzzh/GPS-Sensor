@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.example.myapplication"
+        applicationId "com.sonydafa.phoneUsage"
         minSdkVersion 22
         targetSdkVersion 29
         versionCode 1
@@ -27,6 +27,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     //add by george on 30 Sept,2019
     implementation  group: 'joda-time', name: 'joda-time', version: '2.10'
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'

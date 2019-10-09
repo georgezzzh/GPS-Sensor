@@ -6,4 +6,8 @@
     <string name="title_set">Set</string>
     <string name="title_dashboard">Pie</string>
     <string name="title_notifications">Notifications</string>
+    <string name="button_compass">指南针</string>
+    <string name="sensor_light">光线传感器</string>
+    <string name="txt_btn">查看txt信息</string>
+    <string name="export_btn">导出csv</string>
 </resources>

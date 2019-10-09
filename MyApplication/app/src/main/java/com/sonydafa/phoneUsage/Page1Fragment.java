@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.sonydafa.phoneUsage;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import androidx.fragment.app.Fragment;
+
+import com.sonydafa.phoneUsage.R;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
