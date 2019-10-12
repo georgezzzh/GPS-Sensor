@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+                android:name="com.baidu.lbsapi.API_KEY"
+                android:value="A6gQog4AAziljlIXmrKTsTxalzvDIc2d" />
         <activity
             android:name="com.sonydafa.phoneUsage.MainActivity"
             android:label="@string/app_name"
@@ -20,10 +23,26 @@
             </intent-filter>
         </activity>
         <activity android:name="com.sonydafa.phoneUsage.SensorActivity"/>
-        <activity android:name="com.sonydafa.phoneUsage.TxtContentActivity"/>
+        <activity android:name="com.sonydafa.phoneUsage.GpsActivity"/>
+        <service android:name="com.baidu.location.f"
+            android:enabled="true"
+            android:process=":remote"/>
     </application>
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS"
         tools:ignore="ProtectedPermissions"/>
-    <!--手机存储-->
+
+    <!-- 访问网络，进行地图相关业务数据请求，包括地图数据，路线规划，POI检索等 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 获取网络状态，根据网络状态切换进行数据请求网络转换 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 这个权限用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <!-- 这个权限用于访问GPS定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!-- 读取外置存储。如果开发者使用了so动态加载功能并且把so文件放在了外置存储区域，则需要申请该权限，否则不需要 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- 写外置存储。如果开发者使用了离线地图，并且数据写在外置存储区域，则需要申请该权限 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--android 9.0权限-->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 </manifest>

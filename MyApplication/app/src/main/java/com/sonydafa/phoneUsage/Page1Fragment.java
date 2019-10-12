@@ -65,7 +65,7 @@ public class Page1Fragment extends Fragment {
                 //默认已经卸载过的icon
                 pairs.put("picture",defaultIcon);
             }
-            Log.d("homePage",pairs.toString());
+            //Log.d("homePage",pairs.toString());
             dataSet.add(pairs);
         }
         HashMap<String,Object>pairs=new HashMap<>();

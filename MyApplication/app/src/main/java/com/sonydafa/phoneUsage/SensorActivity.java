@@ -18,10 +18,8 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.sonydafa.phoneUsage.R;
-
+import java.io.File;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 
 public class SensorActivity  extends Activity {
 
@@ -29,12 +27,10 @@ public class SensorActivity  extends Activity {
     View compassArrow;
     TextView compassInfo;
     private SensorManager sensorManager;
-    private long lastReadTime=System.currentTimeMillis();
-    public static String fileName="accelerate.csv";
+
     private SensorEventListener sensorEventListener = new SensorEventListener() {
         float[] accelerometerValues = new float[3];
         float[] magneticValues = new float[3];
-        float[] linearAValues=new float[3];
         private float lastRotateDegree;
 
         @Override
@@ -47,17 +43,6 @@ public class SensorActivity  extends Activity {
                 case Sensor.TYPE_MAGNETIC_FIELD:
                     magneticValues = event.values.clone();
                     break;
-                case Sensor.TYPE_LINEAR_ACCELERATION:
-                    linearAValues = event.values.clone();
-                    //100毫秒刷新一次
-                    if(System.currentTimeMillis()-lastReadTime>100){
-                        String info=System.currentTimeMillis()+","+numFormat(linearAValues[0])+","+
-                                numFormat(linearAValues[1])+","+numFormat(linearAValues[2])+"\n";
-                        Log.i("info",info);
-                        lastReadTime=System.currentTimeMillis();
-                        FileTransfer fileTransfer = new FileTransfer(getApplicationContext());
-                        fileTransfer.writeFileData(fileName,info);
-                    }
             }
             float[] R = new float[9];
             float[] values = new float[3];
@@ -122,31 +107,17 @@ public class SensorActivity  extends Activity {
         if(sensorManager==null) return;
         Sensor magneticSensor = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
         Sensor accelerometerSensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        Sensor linearASensor=sensorManager.getDefaultSensor(Sensor.TYPE_LINEAR_ACCELERATION);
-
         sensorManager.registerListener(sensorEventListener, magneticSensor, SensorManager.SENSOR_DELAY_GAME);
         sensorManager.registerListener(sensorEventListener, accelerometerSensor, SensorManager.SENSOR_DELAY_GAME);
-        sensorManager.registerListener(sensorEventListener,linearASensor,SensorManager.SENSOR_DELAY_GAME);
-        //注册按钮
-        Button btn=findViewById(R.id.txtContentBtn);
+        //注册按钮,点击切换到gsp页面
+        Button btn=findViewById(R.id.gpsBtn);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TxtContentActivity.class);
+                Intent intent = new Intent(getApplicationContext(), GpsActivity.class);
                 startActivity(intent);
             }
         });
-        Button exportBtn = findViewById(R.id.exportTxtBtn);
-        exportBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                new FileTransfer(getApplicationContext()).exportFile(fileName);
-            }
-        });
-        //清空数据文件
-        getApplicationContext().deleteFile(fileName);
-        FileTransfer fileTransfer = new FileTransfer(getApplicationContext());
-        fileTransfer.writeFileData(fileName,"time,x,y,z\n");
     }
 
     @Override

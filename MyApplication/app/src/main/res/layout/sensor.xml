@@ -24,7 +24,7 @@
         android:padding="20dp"/>
     <!--android:layout_alignParentBottom="true"-->
     <Button
-        android:id="@+id/txtContentBtn"
+        android:id="@+id/gpsBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -34,6 +34,7 @@
         android:background="@drawable/button_shape"
         android:text="@string/txt_btn"
         android:textColor="#ffffff" />
+    <!--
     <Button
         android:id="@+id/exportTxtBtn"
         android:layout_width="match_parent"
@@ -45,4 +46,5 @@
         android:background="@drawable/button_shape"
         android:text="@string/export_btn"
         android:textColor="#ffffff" />
+        -->
 </RelativeLayout>
