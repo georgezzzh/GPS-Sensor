@@ -17,7 +17,7 @@ def haversine(lon1, lat1, lon2, lat2):
     return c * r * 1000
 
 
-gps_data = pd.read_csv(r"C:\Users\George\Desktop\gps_info.csv")
+gps_data = pd.read_csv(r"gps_info.csv")
 pd.set_option('mode.chained_assignment', None)
 time_raw = gps_data['time']
 latitude = gps_data['latitude']
