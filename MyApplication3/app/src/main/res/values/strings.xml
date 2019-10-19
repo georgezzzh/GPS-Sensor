@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Sensor</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_home">GPS</string>
+    <string name="title_pie">Compass</string>
+    <string name="title_set">Set</string>
+    <string name="title_dashboard">Compass</string>
+    <string name="title_notifications">Light</string>
+    <string name="sensor_light">光线传感器</string>
+    <string name="txt_btn">查看GPS轨迹</string>
+</resources>
