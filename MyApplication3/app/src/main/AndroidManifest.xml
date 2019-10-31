@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <meta-data
                 android:name="com.baidu.lbsapi.API_KEY"
-                android:value="A6gQog4AAziljlIXmrKTsTxalzvDIc2d" />
+                android:value="your_key" />
         <activity
             android:name="com.sonydafa.phoneUsage.MainActivity"
             android:label="@string/app_name"
