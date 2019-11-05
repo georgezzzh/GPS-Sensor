@@ -27,7 +27,7 @@ distance = [0]*(len(latitude)-1)
 # 将时间格式化，转换成容易处理的list
 time = [value for value in time_raw]
 for i in range(0, len(latitude)-2):
-    distance[i] = haversine(latitude[i], longitude[i], latitude[i+1], longitude[i+1])
+    distance[i] = haversine(longitude[i], latitude[i], longitude[i+1], latitude[i+1])
 # 消除距离为0的点，距离为0意味着两个gps点是相同的
 i = 0
 while i < len(distance):
@@ -57,8 +57,7 @@ plt.ylabel("velocity(m/s)")
 plt.xlabel("time(s)")
 plt.plot(velocity)
 plt.figure(2)
-plt.scatter(latitude, longitude, s=5)
+plt.scatter(latitude, longitude, s=0.1)
 plt.tick_params(axis='both')
 plt.title("total distance is "+str(round(sum_dist, 2))+" m")
 plt.show()
-
