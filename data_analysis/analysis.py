@@ -7,14 +7,8 @@ import matplotlib.pyplot as plt
 
 
 def haversine(lon1, lat1, lon2, lat2):
-    # 求两个经纬度之间的距离
-    lon1, lat1, lon2, lat2 = map(radians, [lon1, lat1, lon2, lat2])
-    dlon = lon2 - lon1
-    dlat = lat2 - lat1
-    a = sin(dlat/2)**2 + cos(lat1) * cos(lat2) * sin(dlon/2)**2
-    c = 2 * asin(sqrt(a))
-    r = 6371
-    return c * r * 1000
+    # 因为百度的GPS位置与国际GPS记录不同，百度坐标系:bd-09，所以算法采用百度计算距离的方法
+    return sqrt(pow(111.2*(lon2-lon1), 2)+pow(111.2*(lat2-lat1)*cos(lat2/57.29578), 2))*1000
 
 
 gps_data = pd.read_csv(r"gps_info.csv")
