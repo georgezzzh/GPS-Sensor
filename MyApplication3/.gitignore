@@ -1,7 +1,7 @@
 *.iml
 *.jar
 *.zip
-.gradle
+.gradle/*
 /local.properties
 /.idea/caches
 /.idea/libraries
@@ -13,3 +13,6 @@
 /build
 /captures
 .externalNativeBuild
+/app/libs/*
+/app/build/*
+/app/release
