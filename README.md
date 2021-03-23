@@ -7,4 +7,3 @@
 **page3Fragment.java是光线传感器**  
 <img src="https://github.com/georgezzzh/GPS-Sensor/raw/master/readme_resource/compass_sensor.png" alt="compass_sensor" width="300"/>  
 
-[apk下载地址](https://github.com/georgezhou314/Phone-Usage/blob/master/MyApplication/app/release/app-release.apk?raw=true)
